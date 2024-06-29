@@ -1,0 +1,38 @@
+{% from "bootstrap5/form.html" import render_form %}
+{% set active_page = "my_bids" %}
+{% extends 'base.html' %}
+
+{% block title %}Logistics{% endblock %}
+
+{% block content %}
+
+<main class="mb-4">
+  <div class="container">
+    <div class="col-lg-8 col-md-8 mx-auto">
+      <table class="table table-striped" id="projectsTable">
+        <thead>
+          <tr>
+            <th scope="col">Bid ID</th>
+            <th scope="col">Request ID</th>
+            <th scope="col">Bid Amount</th>
+            <th scope="col">Created Date</th>
+            <th scope="col">Bid Status</th>
+          </tr>
+        </thead>
+        <tbody>
+      
+      {% for bid in bids %}
+      <tr>
+            <td>{{ bid.id }}</td>
+            <td><a href="{{ url_for("supplier_routes.supplier_request", id=bid.request_id) }}">{{ bid.request_id }}</a></td>
+            <td>{{ bid.bid_amount }}</td>
+            <td>{{ bid.created_date.strftime('%Y/%m/%d') }}</td>
+            <td>{{ bid.bid_status }}</td>
+          </tr>
+      {% endfor %}
+      
+    </div>
+  </div>
+</main>
+
+{% endblock %}

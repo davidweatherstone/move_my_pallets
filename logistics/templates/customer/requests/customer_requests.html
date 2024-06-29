@@ -1,0 +1,53 @@
+{% from "bootstrap5/form.html" import render_form %}
+{% set active_page = "requests" %}
+{% extends 'base.html' %}
+
+{% block title %}Logistics{% endblock %}
+
+{% block content %}
+
+<main class="mb-4">
+  <div class="container">
+    <div class="row justify-content-center">
+      <main class="mb-4">
+        <div class="container">
+          <div class="col text-center">
+              <a class="btn btn-secondary" href="{{ url_for("customer_routes.create_request") }}" role="button">Create Request</a>
+          </div>
+        </div>
+      </main>
+  </div>
+    <div class="col-lg-8 col-md-8 mx-auto">
+      <table class="table table-striped" id="requestsTable">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">From</th>
+            <th scope="col">To</th>
+            <th scope="col">Collection</th>
+            <th scope="col">Delivery</th>
+            <th scope="col">Pallets</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Status</th>
+            <th scope="col">Details</th>
+          </tr>
+        </thead>
+        <tbody>
+      {% for request in requests %}
+          <tr>
+            <td>{{ request.id }}</td>
+            <td>{{ ", ".join(request.collection_address.split(",")[-3:-1]) }}</td>
+            <td>{{ ", ".join(request.delivery_address.split(",")[-3:-1]) }}</td>
+            <td>{{ request.collection_date.strftime("%Y/%m/%d") }}</td>
+            <td>{{ request.delivery_date.strftime("%Y/%m/%d") }}</td>
+            <td>{{ request.pallets }}</td>
+            <td>{{ request.weight }}kg</td>
+            <td name="Status">{{ request.request_status }}</td>
+            <td><a href="{{ url_for("customer_routes.view_request", id=request.id) }}">View</a></td>
+          </tr>
+      {% endfor %}
+    </div>
+  </div>
+</main>
+
+{% endblock %}

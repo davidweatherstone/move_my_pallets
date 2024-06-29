@@ -1,0 +1,120 @@
+{% from "bootstrap5/form.html" import render_form %}
+{% set active_page = "request" %}
+{% extends 'base.html' %}
+
+{% block title %}Logistics{% endblock %}
+
+{% block content %}
+
+
+<main class="mb-4">
+  <div class="container">
+    <div class="d-flex justify-content-center">
+      {% if request.request_status != "Complete": %}
+        <div class="mx-2">
+          <a class="btn btn-secondary" href="{{ url_for("customer_routes.remove_request", id=request.id) }}" role="button" onclick="return confirm('Are you sure?');">Remove</a>
+        </div>
+      {% endif %}
+      {% if bids | length == 0: %}
+        <div class="mx-2">
+          <a class="btn btn-secondary" href="{{ url_for("customer_routes.update_request", id=request.id) }}" role="button">Update</a>
+        </div>
+      {% endif %}
+    </div>
+    <div class="col-lg-8 col-md-8 mx-auto">
+      <table class="table table-striped" id="projectsTable">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">From</th>
+            <th scope="col">To</th>
+            <th scope="col">Collection</th>
+            <th scope="col">Delivery</th>
+            <th scope="col">Pallets</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ request.id }}</td>
+            <td>{{ ", ".join(request.collection_address.split(",")[-3:-1]) }}</td>
+            <td>{{ ", ".join(request.delivery_address.split(",")[-3:-1]) }}</td>
+            <td>{{ request.collection_date.strftime('%Y/%m/%d') }}</td>
+            <td>{{ request.delivery_date.strftime('%Y/%m/%d') }}</td>
+            <td>{{ request.pallets }}</td>
+            <td>{{ request.weight }}kg</td>
+            <td>{{ request.request_status }}</td>
+          </tr>
+          <br>
+          <table class="table table-striped" id="collectionAddress">
+            <thead>
+              <tr>
+                <th scope="col">Full Collection Address</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <a href="https://www.google.com/maps/search/?api=1&query={{ request.collection_address }}">
+                    {{ request.collection_address }}
+                  </a>
+                </td>
+              </tr>
+              <br>
+              <table class="table table-striped" id="deliveryAddress">
+                <thead>
+                  <tr>
+                    <th scope="col">Full Delivery Address</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                    <a href="https://www.google.com/maps/search/?api=1&query={{ request.delivery_address }}">
+                    {{ request.delivery_address }}
+                    </a>
+                  </td>
+              </tr>
+              <br>
+              {% if bids | length > 0: %}
+              <table class="table table-striped" id="bidsReceivedTable">
+                <br>
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Company</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Created Date</th>
+                    {% if request.request_status == "Complete": %}
+                    <th scope="col">Status</th>
+                    {% else: %}
+                    <th scope="col">Action</th>
+                    {% endif %}
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for bid in bids %}
+                  <tr>
+                    <td>{{ bid.bid_id }}</td>
+                    <td>{{ bid.company }}</td>
+                    <td>{{ bid.bid_amount }}</td>
+                    <td>{{ bid.created_date.strftime('%Y/%m/%d') }}</td>
+                    {% if bid.bid_status != "Awaiting response": %}
+                    <td>{{ bid.bid_status }}</td>
+                    {% else: %}
+                    <td>
+                      <a href="{{ url_for("customer_routes.accept_bid", bid_id=bid.bid_id) }}">Accept</a>
+                      /
+                      <a href="{{ url_for("customer_routes.reject_bid", bid_id=bid.bid_id) }}">Reject</a>
+                    </td>
+                    {% endif %}
+                  </tr>
+                  {% endfor %}
+                  {% endif %}
+    </div>
+  </div>
+</main>
+
+
+{% endblock %}

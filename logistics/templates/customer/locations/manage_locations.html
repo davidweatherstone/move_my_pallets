@@ -1,0 +1,52 @@
+{% from "bootstrap5/form.html" import render_form %}
+{% set active_page = "manage_locations" %}
+{% extends 'base.html' %}
+
+{% block title %}Logistics{% endblock %}
+
+{% block content %}
+
+<main class="mb-4">
+  <div class="container">
+    <div class="col text-center">
+        <a class="btn btn-secondary" href="{{ url_for("location_routes.create_location") }}" role="button">Create Location</a>
+    </div>
+  </div>
+</main>
+
+<div class="col-lg-8 col-md-8 mx-auto">
+<table class="table table-striped" id="locationsTable">
+    <thead>
+      <tr>
+        <th scope="col">Company</th>
+        <th scope="col">Street</th>
+        <th scope="col">City</th>
+        <th scope="col">Country</th>
+        <th scope="col">Zip Code</th>
+        <th scope="col">Map View</th>
+        <th scope="col">Modify</th>
+      </tr>
+    </thead>
+    <tbody>
+  {% if locations: %}
+  {% for location in locations %}
+      <tr>
+        <td>{{ location.name }}</td>
+        <td>{{ location.street }}</td>
+        <td>{{ location.city }}</td>
+        <td>{{ location.country }}</td>
+        <td>{{ location.zipcode }}</td>
+        <td><a href="https://www.google.com/maps/search/?api=1&query={{ location.street }}+{{ location.city }}+{{ location.country }}">Click Here</td>
+        <td>
+          <a href="{{ url_for('location_routes.update_location', id=location.id) }}">Update</a> / 
+          <a href="{{ url_for('location_routes.delete_location', id=location.id) }}" onclick="return confirm('Are you sure?');">Delete</a></td>
+      </tr>
+  {% endfor %}
+  {% endif %}
+</tbody>
+</table>
+</div>
+</div>
+
+
+{% endblock %}

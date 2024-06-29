@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block title %}Logistics{% endblock %}
+
+{% block content %}
+
+<main class="mb-4">
+    <div class="container">
+      <div>
+              <!-- Hero -->
+        <div class="container col-xxl-8 px-4 py-5">
+          <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+            <div class="col-10 col-sm-8 col-lg-6">
+              <img src="static/img/img_001.jpg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+            </div>
+            <div class="col-lg-6">
+              <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Move your pallets today!</h1>
+              <p class="lead">The roads are full of empty trucks, leading to significant waste of resource. Join our network and gain access to reliable carriers across Europe while reducing waste.</p>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <a href="{{ url_for('auth.register') }}"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Start shipping</button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature cards -->
+      <div class="container px-4 py-5" id="featured-3">
+        <h2 class="pb-2 border-bottom">Excellent service without the hassle</h2>
+        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+          <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+              <svg class="bi" width="1em" height="1em"><use xlink:href="#collection"></use></svg>
+            </div>
+            <h3 class="fs-2 text-body-emphasis">Easy request creation</h3>
+            <p>Our interface makes it simple to create requests, with access to freight providers across Europe</p>
+          </div>
+          <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+              <svg class="bi" width="1em" height="1em"><use xlink:href="#people-circle"></use></svg>
+            </div>
+            <h3 class="fs-2 text-body-emphasis">Competitive bidding</h3>
+            <p>Access to a our network means that you can be sure you're receiving the best price for your movements</p>
+          </div>
+          <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+              <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg>
+            </div>
+            <h3 class="fs-2 text-body-emphasis">Trusted providers</h3>
+            <p>You can be sure that service levels are high, freight providers are vetted and audited thoroughly.</p>
+          </div>
+        </div>
+
+      <!-- FAQ header-->
+      <section class="bsb-faq-3 py-5 py-md-0 py-4">
+        <div class="container px-4 py-5" id="featured-3">
+          <h2 class="pb-2 border-bottom">Answers to your questions</h2>
+          <div class="row g-4 py-4 row-cols-1 row-cols-lg-3">
+        </div>
+      
+        <!-- FAQ -->
+        <div class="mb-8">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-11 col-xl-10">
+                <div class="accordion accordion-flush" id="faqAccount">
+                  <div class="accordion-item bg-transparent border-top border-bottom py-3">
+                    <h2 class="accordion-header" id="faqAccountHeading1">
+                      <button class="accordion-button collapsed bg-transparent fw-bold shadow-none link-primary" type="button" data-bs-toggle="collapse" data-bs-target="#faqAccountCollapse1" aria-expanded="false" aria-controls="faqAccountCollapse1">
+                        How do I sign up?
+                      </button>
+                    </h2>
+                    <div id="faqAccountCollapse1" class="accordion-collapse collapse" aria-labelledby="faqAccountHeading1">
+                      <div class="accordion-body">
+                        <p>Click <a href="{{ url_for('auth.register') }}">here</a> and enter your details, access is to our trusted providers is immediate.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item bg-transparent border-bottom py-3">
+                    <h2 class="accordion-header" id="faqAccountHeading2">
+                      <button class="accordion-button collapsed bg-transparent fw-bold shadow-none link-primary" type="button" data-bs-toggle="collapse" data-bs-target="#faqAccountCollapse2" aria-expanded="false" aria-controls="faqAccountCollapse2">
+                        What markets are accessible through this service?
+                      </button>
+                    </h2>
+                    <div id="faqAccountCollapse2" class="accordion-collapse collapse" aria-labelledby="faqAccountHeading2">
+                      <div class="accordion-body">
+                        <p>The whole of Europe, including the UK and Ireland.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item bg-transparent border-bottom py-3">
+                    <h2 class="accordion-header" id="faqAccountHeading3">
+                      <button class="accordion-button collapsed bg-transparent fw-bold shadow-none link-primary" type="button" data-bs-toggle="collapse" data-bs-target="#faqAccountCollapse3" aria-expanded="false" aria-controls="faqAccountCollapse3">
+                        How many freight providers are in your network?
+                      </button>
+                    </h2>
+                    <div id="faqAccountCollapse3" class="accordion-collapse collapse" aria-labelledby="faqAccountHeading3">
+                      <div class="accordion-body">
+                        <p>There are over 40 providers currently bidding for movements within our platform, with more being vetted and added each month.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item bg-transparent border-bottom py-3">
+                    <h2 class="accordion-header" id="faqAccountHeading4">
+                      <button class="accordion-button collapsed bg-transparent fw-bold shadow-none link-primary" type="button" data-bs-toggle="collapse" data-bs-target="#faqAccountCollapse4" aria-expanded="false" aria-controls="faqAccountCollapse4">
+                        I represent a freight provider, how do I access this platform?
+                      </button>
+                    </h2>
+                    <div id="faqAccountCollapse4" class="accordion-collapse collapse" aria-labelledby="faqAccountHeading4">
+                      <div class="accordion-body">
+                        <p>You can sign up as a supplier <a href="{{ url_for('auth.register') }}">here</a> and we will be in contact to discuss the onboarding process</p>
+                      </div>
+                    </div>
+                  </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      
+      </section>
+
+      </div>
+
+    </div>
+</main>
+
+{% endblock %}

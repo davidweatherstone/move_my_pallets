@@ -1,0 +1,115 @@
+{% from "bootstrap5/form.html" import render_form %}
+{% set active_page = "requests" %}
+{% extends 'base.html' %}
+
+{% block title %}Logistics{% endblock %}
+
+{% block content %}
+
+<main class="mb-4">
+  <div class="container">
+    <div class="row justify-content-center">
+
+  </div>
+    <div class="col-lg-8 col-md-8 mx-auto">
+      <table class="table table-striped" id="requestsNotBidTable">
+        <h3>Open Requests</h3>
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Company</th>
+            <th scope="col">From</th>
+            <th scope="col">To</th>
+            <th scope="col">Collection</th>
+            <th scope="col">Delivery</th>
+            <th scope="col">Pallets</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Details</th>
+          </tr>
+        </thead>
+        <tbody>
+      {% for request in live_requests_not_bid %}
+          <tr>
+            <td>{{ request.request_id }}</td>
+            <td>{{ request.company }}</td>
+            <td>{{ ", ".join(request.collection_address.split(",")[-3:-1]) }}</td>
+            <td>{{ ", ".join(request.delivery_address.split(",")[-3:-1]) }}</td>
+            <td>{{ request.collection_date.strftime("%Y/%m/%d") }}</td>
+            <td>{{ request.delivery_date.strftime("%Y/%m/%d") }}</td>
+            <td>{{ request.pallets }}</td>
+            <td>{{ request.weight }}kg</td>
+            <td><a href="{{ url_for("supplier_routes.supplier_request", id=request.request_id)}}">View</a></td>
+          </tr>
+      {% endfor %}
+    </div>
+    {% if requests_bid: %}
+    <div class="col-lg-8 col-md-8 mx-auto">
+      <table class="table table-striped" id="requestsBidTable">
+        <h3>Open Bids</h3>
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Company</th>
+            <th scope="col">From</th>
+            <th scope="col">To</th>
+            <th scope="col">Collection</th>
+            <th scope="col">Delivery</th>
+            <th scope="col">Pallets</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Details</th>
+          </tr>
+        </thead>
+        <tbody>
+      {% for request in requests_bid %}
+          <tr>
+            <td>{{ request.request_id }}</td>
+            <td>{{ request.company }}</td>
+            <td>{{ ", ".join(request.collection_address.split(",")[-3:-1]) }}</td>
+            <td>{{ ", ".join(request.delivery_address.split(",")[-3:-1]) }}</td>
+            <td>{{ request.collection_date.strftime("%Y-%m-%d") }}</td>
+            <td>{{ request.delivery_date.strftime("%Y-%m-%d") }}</td>
+            <td>{{ request.pallets }}</td>
+            <td>{{ request.weight }}kg</td>
+            <td><a href="{{ url_for("supplier_routes.supplier_request", id=request.request_id)}}">View</a></td>
+          </tr>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if requests_bid_won: %}
+    <div class="col-lg-8 col-md-8 mx-auto">
+      <table class="table table-striped" id="requestsBidWonTable">
+        <h3>Winning Bids</h3>
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Company</th>
+            <th scope="col">From</th>
+            <th scope="col">To</th>
+            <th scope="col">Collection</th>
+            <th scope="col">Delivery</th>
+            <th scope="col">Pallets</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Details</th>
+          </tr>
+        </thead>
+        <tbody>
+      {% for request in requests_bid_won %}
+          <tr>
+            <td>{{ request.request_id }}</td>
+            <td>{{ request.company }}</td>
+            <td>{{ ", ".join(request.collection_address.split(",")[-3:-1]) }}</td>
+            <td>{{ ", ".join(request.delivery_address.split(",")[-3:-1]) }}</td>
+            <td>{{ request.collection_date.strftime("%Y-%m-%d") }}</td>
+            <td>{{ request.delivery_date.strftime("%Y-%m-%d") }}</td>
+            <td>{{ request.pallets }}</td>
+            <td>{{ request.weight }}kg</td>
+            <td><a href="{{ url_for("supplier_routes.supplier_request", id=request.request_id)}}">View</a></td>
+          </tr>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</main>
+
+{% endblock %}

@@ -1,0 +1,100 @@
+{% from "bootstrap5/form.html" import render_form %}
+{% set active_page = "requests" %}
+{% extends 'base.html' %}
+
+{% block title %}Logistics{% endblock %}
+
+{% block content %}
+
+
+<main class="mb-4">
+  <div class="container">
+    <div class="row justify-content-center">
+      <main class="mb-4">
+        {% if not bid: %}
+        <div class="container">
+          <div class="col text-center">
+              <a class="btn btn-secondary" href="{{ url_for("supplier_routes.submit_bid", id=request.id) }}" role="button">Submit Bid</a>
+          </div>
+        </div>
+        {% endif %}
+      </main>
+  </div>
+
+    <div class="col-lg-8 col-md-8 mx-auto">
+      <table class="table table-striped" id="projectsTable">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">From</th>
+            <th scope="col">To</th>
+            <th scope="col">Collection</th>
+            <th scope="col">Delivery</th>
+            <th scope="col">Pallets</th>
+            <th scope="col">Weight</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ request.id }}</td>
+            <td>{{ ", ".join(request.collection_address.split(",")[-3:-1]) }}</td>
+            <td>{{ ", ".join(request.delivery_address.split(",")[-3:-1]) }}</td>
+            <td>{{ request.collection_date.strftime('%Y/%m/%d') }}</td>
+            <td>{{ request.delivery_date.strftime('%Y/%m/%d') }}</td>
+            <td>{{ request.pallets }}</td>
+            <td>{{ request.weight }}kg</td>
+          </tr>
+          <br>
+          <table class="table table-striped" id="collectionAddress">
+            <thead>
+              <tr>
+                <th scope="col">Full Collection Address</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <a href="https://www.google.com/maps/search/?api=1&query={{ request.collection_address }}">
+                    {{ request.collection_address }}
+                  </a>
+                </td>
+              </tr>
+              <br>
+              <table class="table table-striped" id="deliveryAddress">
+                <thead>
+                  <tr>
+                    <th scope="col">Full Delivery Address</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                    <a href="https://www.google.com/maps/search/?api=1&query={{ request.delivery_address }}">
+                    {{ request.delivery_address }}
+                    </a>
+                  </td>
+              </tr>
+              <br>
+              {% if bid: %}
+              <table class="table table-striped" id="projectsTable">
+                <thead>
+                  <tr>
+                    <th scope="col">Bid ID</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{ bid.id }}</td>
+                    <td>{{ bid.bid_amount }}</td>
+                    <td>{{ bid.bid_status }}</td>
+                  </tr>
+                  <br>
+                  {% endif %}
+    </div>
+  </div>
+</main>
+
+
+{% endblock %}

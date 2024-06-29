@@ -1,0 +1,22 @@
+{% from "bootstrap5/form.html" import render_form %}
+{% set active_page = "login" %}
+{% extends 'base.html' %}
+
+{% block title %}Logistics{% endblock %}
+
+{% block content %}
+
+<main class="mb-4">
+  <div class="container">
+    <div class="col-lg-8 col-md-8 mx-auto">
+{{ render_form(form) }}
+<br>
+<div>New to Logistics? <a href="{{ url_for("auth.register") }}">Register Now!</a></div>
+</div>
+  </div>
+
+</main>
+
+{% endblock %}
+
+
