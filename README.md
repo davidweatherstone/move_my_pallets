@@ -71,4 +71,4 @@ flask --app logistics run --debug
 Following this, sign up as both a Customer and a Supplier to explore the different functionality that each user has access to. 
 
 ## Additional Notes
-While SQLite has been useful for building this project, and could work with small-scale applications, I'm aware of its limitations and if I was to take this project further I would consider a more robust database solution such as PostreSEL and MySQL.
+While SQLite has been useful for building this project, and could work with small-scale applications, I'm aware of its limitations and if I was to take this project further I would consider a more robust database solution such as PostgreSQL or MySQL.
