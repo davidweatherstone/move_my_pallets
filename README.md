@@ -35,7 +35,6 @@
 * Bid Management: Suppliers can view open requests and submit competitive bids.
 
 ## Installation and Usage
-For now (29/06/2024), I have the project running here: https://move-my-pallets.onrender.com/
 
 Installation
 
